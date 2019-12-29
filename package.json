@@ -1,0 +1,30 @@
+{
+  "name": "teampacr-profile-generator",
+  "version": "1.0.0",
+  "description": "application that generates pdf containing github profile details",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gideonrynn/teampacr-profile-generator-hw7.git"
+  },
+  "keywords": [
+    "teampacr",
+    "profile-generator",
+    "profile",
+    "generator",
+    "github"
+  ],
+  "author": "sarah dillard",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gideonrynn/teampacr-profile-generator-hw7/issues"
+  },
+  "homepage": "https://github.com/gideonrynn/teampacr-profile-generator-hw7#readme",
+  "dependencies": {
+    "axios": "^0.19.0",
+    "inquirer": "^7.0.1"
+  }
+}
