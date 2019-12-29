@@ -1,6 +1,8 @@
+const fs = require("fs");
 const inquirer = require("inquirer");
+const generateHTML = require("./generateHTML");
 
-
+//create questions object with prompts for user
 const questions = [
     {
         type: "input",
@@ -17,11 +19,14 @@ const questions = [
   
 ];
 
-function writeToFile(fileName, data) {
+// function writeToFile(fileName, data) {
  
-}
+// }
 
 function initiate() {
+
+  //inquirer will prompt user from questions object
+  inquirer.prompt(questions)
 
 }
 
