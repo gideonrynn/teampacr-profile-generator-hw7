@@ -38,7 +38,9 @@ function initiate() {
 
   //inquirer will prompt user from questions object, then using those responses to generate html and pull data from api
 
-  inquirer.prompt(questions).then(({ username, color }) => {
+  inquirer.prompt(questions)
+  
+  .then(({ username, color }) => {
   
     //pull template from generateHTML to create pdf using puppeteer
     (async () => {
