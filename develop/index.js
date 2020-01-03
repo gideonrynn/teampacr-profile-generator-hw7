@@ -8,7 +8,7 @@ const puppeteer = require("puppeteer");
 //require local file that contains html template into which data will be plugged
 const generateHTML = require("./generateHTML");
 
-//create questions object with prompts for user
+//create questions object with prompts for user to be used with inquirer
 const questions = [
     {
         type: "input",
@@ -25,25 +25,26 @@ const questions = [
   
 ];
 
-// function writeToFile(data) {
-
-//     fs.readFile("log.txt", "utf8", function(data, error) {
-//       console.log(data);
-
-//     });
-// }
-
-
+//this function will prompt the user for information, pull data from the api before generating a pdf in the local folder
 function initiate() {
 
-  //inquirer will prompt user from questions object, then using those responses to generate html and pull data from api
+  //prompt user from questions object, then use those responses to generate html and pull data from github
 
   inquirer.prompt(questions)
-  
+
   .then(({ username, color }) => {
-  
-    //pull template from generateHTML to create pdf using puppeteer
-    (async () => {
+
+        const githubURL = `https://api.github.com/users/${username}`;
+
+        // const githubRepoURL = `https://api.github.com/users/${username}/repos?per_page=100`;
+
+        axios.get(githubURL)
+        
+        .then(function(response) {
+          console.log(response);
+
+      //pull template from generateHTML to create pdf using puppeteer
+      (async () => {
   
       try {
        
@@ -53,7 +54,7 @@ function initiate() {
         //await go to will pull from existing web page
          // await page.goto('https://gideonrynn.github.io/portfolio-gideonrynn-array/');
     
-        const html = generateHTML({color});
+        const html = generateHTML({color}, response);
 
         await page.setContent(html);
 
@@ -63,7 +64,8 @@ function initiate() {
         await browser.close();
         process.exit();
 
-      //end try
+
+      //end try then catch
       } catch (e) {
         
         console.log('our error', e);
@@ -73,9 +75,12 @@ function initiate() {
       
     //end async
     }) ();
-  
+
+
   //end inquirer then
   });
+
+});
 
 //end initiate function
 }
