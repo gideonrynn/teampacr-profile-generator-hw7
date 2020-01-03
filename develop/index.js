@@ -1,9 +1,15 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
+
+//require puppeteer package that will create pdf
+const puppeteer = require("puppeteer");
+
+//require local file that contains html template into which data will be plugged
 const generateHTML = require("./generateHTML");
 
-const pdf = require('html-pdf');
-const html = fs.readFileSync('./businesscard.html', 'utf8');
+//test for html-pdf, which has been uninstalled due to security vulnerability
+// const html = fs.readFileSync('./businesscard.html', 'utf8');
+const writeFileAsync = util.promisify(fs.writeFile);
 
 //create questions object with prompts for user
 const questions = [
@@ -31,14 +37,16 @@ function initiate() {
   //inquirer will prompt user from questions object, then using those responses
   inquirer.prompt(questions).then(({ username, color }) => {
 
-    pdf.create(html).toFile('./businesscard.pdf', function(err, res) {
-
-      if (err) return console.log(err);
-
-      console.log(res); // { filename: '/app/businesscard.pdf' }
-
-    })
-
+    //puppeteer code to use new index to create pdf
+    (async () => {
+      const browser = await puppeteer.launch();
+      const page = await browser.newPage();
+      await page.goto('https://gideonrynn.github.io/portfolio-gideonrynn-array/');
+      await page.pdf({path: 'resume.pdf', format: 'A4'});
+     
+      await browser.close();
+    })();
+    
   });
 
 }
