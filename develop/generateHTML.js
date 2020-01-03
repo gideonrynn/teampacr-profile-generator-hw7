@@ -25,8 +25,10 @@ const colors = {
   }
 };
 
-function generateHTML(data) {
-  console.log(data.color);
+function generateHTML(colorInput, githubData) {
+  // console.log(colorInput.color);
+  // console.log(githubData);
+
   return `<!DOCTYPE html>
 <html lang="en">
    <head>
@@ -53,7 +55,7 @@ function generateHTML(data) {
          height: 100%;
          }
          .wrapper {
-         background-color: ${colors[data.color].wrapperBackground};
+         background-color: ${colors[colorInput.color].wrapperBackground};
          padding-top: 100px;
          }
          body {
@@ -95,8 +97,8 @@ function generateHTML(data) {
          display: flex;
          justify-content: center;
          flex-wrap: wrap;
-         background-color: ${colors[data.color].headerBackground};
-         color: ${colors[data.color].headerColor};
+         background-color: ${colors[colorInput.color].headerBackground};
+         color: ${colors[colorInput.color].headerColor};
          padding: 10px;
          width: 95%;
          border-radius: 6px;
@@ -107,7 +109,7 @@ function generateHTML(data) {
          border-radius: 50%;
          object-fit: cover;
          margin-top: -75px;
-         border: 6px solid ${colors[data.color].photoBorderColor};
+         border: 6px solid ${colors[colorInput.color].photoBorderColor};
          box-shadow: rgba(0, 0, 0, 0.3) 4px 1px 20px 4px;
          }
          .photo-header h1, .photo-header h2 {
@@ -150,8 +152,8 @@ function generateHTML(data) {
          .card {
            padding: 20px;
            border-radius: 6px;
-           background-color: ${colors[data.color].headerBackground};
-           color: ${colors[data.color].headerColor};
+           background-color: ${colors[colorInput.color].headerBackground};
+           color: ${colors[colorInput.color].headerColor};
            margin: 20px;
          }
          
@@ -174,28 +176,68 @@ function generateHTML(data) {
       </style>
       </head>
       <body>
+      <div class="container">
         <div class="wrapper">
 
-          <h1>Fire and Ice</h1>
-          <h3>Robert Frost</h3><br>
-      
-          <div>
-            <p>Some say the world will end in fire,<br>
-            Some say in ice.</p>
-      
-            <p>From what I’ve tasted of desire<br>
-            I hold with those who favor fire.</p>
+        <div class="row my-4">
 
-            <p>But if it had to perish twice, <br>
-            I think I know enough of hate</p>
+        <div class="col my-4">
 
-            <p>To say that for destruction ice<br>
-            Is also great</p>
+         <div class="card">
 
-            <p>And would suffice.</p>
+          <h3>GitHub Developer Profile For</h3>
+          <h1>${githubData.data.name}</h1><br>
+          <h4>${githubData.data.login}</b4><br>
 
           </div>
 
+          </div>
+
+        </div>
+
+        <div class="row my-4">
+            
+
+          <div class="col my-4">
+
+         <div class="card">
+
+            <span>
+            ${githubData.data.location}
+            <a href="${githubData.data.url}" target="_blank"> Github Profile </a>
+            <a href="${githubData.data.blog}" target="_blank"> Blog </a>
+            </span>
+
+          </div>
+
+          </div>
+         </div>
+
+         
+        <div class="row my-4">
+            
+
+        <div class="col my-4">
+
+       <div class="card">
+
+            <div>${githubData.data.bio}</div>
+
+            <p>Public Repositories: ${githubData.data.public_repos}</p>
+            
+            <p>Followers: ${githubData.data.followers} </p>
+
+            <p>Following: ${githubData.data.following}</p>
+
+            </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        
         </div>
 
       </body>

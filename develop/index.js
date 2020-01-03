@@ -25,25 +25,25 @@ const questions = [
   
 ];
 
-// function writeToFile(data) {
-
-//     fs.readFile("log.txt", "utf8", function(data, error) {
-//       console.log(data);
-
-//     });
-// }
-
-
+//this function will prompt the user for information, pull data from the api 
 function initiate() {
 
   //inquirer will prompt user from questions object, then using those responses to generate html and pull data from api
 
   inquirer.prompt(questions)
-  
+
   .then(({ username, color }) => {
-  
-    //pull template from generateHTML to create pdf using puppeteer
+
     (async () => {
+  
+      try {
+
+        const queryUrl = `https://api.github.com/users/${username}`;
+
+        axios.get(queryUrl).then(function(response) {
+
+        //pull template from generateHTML to create pdf using puppeteer
+      (async () => {
   
       try {
        
@@ -53,7 +53,18 @@ function initiate() {
         //await go to will pull from existing web page
          // await page.goto('https://gideonrynn.github.io/portfolio-gideonrynn-array/');
     
-        const html = generateHTML({color});
+        const html = generateHTML({color}, response);
+
+        // console.log(response);
+
+        //     console.log(response.data.name);
+        //     console.log(response.data.location);
+        //     console.log(response.data.html_url);
+        //     console.log(response.data.blog);
+        //     console.log(response.data.bio);
+        //     console.log(response.data.public_repos);
+        //     console.log(response.data.followers);
+        //     console.log(response.data.following);
 
         await page.setContent(html);
 
@@ -62,6 +73,21 @@ function initiate() {
 
         await browser.close();
         process.exit();
+
+
+      //end try
+      } catch (e) {
+        
+        console.log('our error', e);
+
+      //end catch
+      }
+      
+    //end async
+    }) ();
+  
+
+        });
 
       //end try
       } catch (e) {
