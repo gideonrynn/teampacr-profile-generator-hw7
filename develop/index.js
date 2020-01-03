@@ -7,38 +7,6 @@ const puppeteer = require("puppeteer");
 //require local file that contains html template into which data will be plugged
 const generateHTML = require("./generateHTML");
 
-
-// const htmlTest =  `<head>
-// <style>
-// h1 {
-//     background-color: green;
-// }
-// div {
-//     background-color: lightblue;
-// }
-// p {
-//     background-color: yellow;
-// }
-// </style>
-//</head>
-// <body>
-// <h1>Fire and Ice</h1>
-// <h2>Robert Frost</h1>
-// <div>
-// Some say the world will end in fire,<br>
-//Some say in ice.
-// <p>From what I’ve tasted of desire<br>
-// I hold with those who favor fire.</p>
-// But if it had to perish twice, <br>
-// I think I know enough of hate
-// <p>To say that for destruction ice<br>
-// Is also great</p>
-// And would suffice.
-// </div>
-//   </body>`;
-
-
-
 //create questions object with prompts for user
 const questions = [
     {
@@ -70,7 +38,7 @@ function initiate() {
   //inquirer will prompt user from questions object, then using those responses
   inquirer.prompt(questions).then(({ username, color }) => {
   
-    //puppeteer code to use pull template from generateHTML to create pdf
+    //pull template from generateHTML to create pdf using puppeteer
     (async () => {
   
       try {

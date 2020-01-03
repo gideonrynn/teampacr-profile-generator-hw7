@@ -26,6 +26,7 @@ const colors = {
 };
 
 function generateHTML(data) {
+  console.log(data.color);
   return `<!DOCTYPE html>
 <html lang="en">
    <head>
@@ -173,20 +174,32 @@ function generateHTML(data) {
       </style>
       </head>
       <body>
-      <h1>Fire and Ice</h1>
-      <h3>Robert Frost</h3><br>
-      <div>
-      Some say the world will end in fire,<br>
-      Some say in ice.
-      <p>From what I’ve tasted of desire<br>
-      I hold with those who favor fire.</p>
-      But if it had to perish twice, <br>
-      I think I know enough of hate
-      <p>To say that for destruction ice<br>
-      Is also great</p>
-      And would suffice.
-      </div>
+        <div class="wrapper">
+
+          <h1>Fire and Ice</h1>
+          <h3>Robert Frost</h3><br>
+      
+          <div>
+            <p>Some say the world will end in fire,<br>
+            Some say in ice.</p>
+      
+            <p>From what I’ve tasted of desire<br>
+            I hold with those who favor fire.</p>
+
+            <p>But if it had to perish twice, <br>
+            I think I know enough of hate</p>
+
+            <p>To say that for destruction ice<br>
+            Is also great</p>
+
+            <p>And would suffice.</p>
+
+          </div>
+
+        </div>
+
       </body>
+      
 </html>`;
 }
 
