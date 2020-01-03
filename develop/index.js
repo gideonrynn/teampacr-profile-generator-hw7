@@ -1,5 +1,6 @@
 const fs = require("fs");
 const inquirer = require("inquirer");
+const axios = require("axios");
 
 //require puppeteer package that will create pdf
 const puppeteer = require("puppeteer");
@@ -35,7 +36,8 @@ const questions = [
 
 function initiate() {
 
-  //inquirer will prompt user from questions object, then using those responses
+  //inquirer will prompt user from questions object, then using those responses to generate html and pull data from api
+
   inquirer.prompt(questions).then(({ username, color }) => {
   
     //pull template from generateHTML to create pdf using puppeteer
@@ -44,6 +46,7 @@ function initiate() {
       try {
        
         const browser = await puppeteer.launch();
+
         const page = await browser.newPage();
         //await go to will pull from existing web page
          // await page.goto('https://gideonrynn.github.io/portfolio-gideonrynn-array/');
@@ -53,7 +56,7 @@ function initiate() {
         await page.setContent(html);
 
         //output resume pdf in A4 letter format. printBackground will display css
-        await page.pdf({path: 'resume.pdf', format: 'A4', printBackground: true});
+        await page.pdf({path: `resume_${username}.pdf`, format: 'A4', printBackground: true});
 
         await browser.close();
         process.exit();
