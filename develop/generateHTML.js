@@ -56,7 +56,7 @@ function generateHTML(colorInput, githubData) {
          }
          .wrapper {
          background-color: ${colors[colorInput.color].wrapperBackground};
-         padding-top: 100px;
+         padding-top: 10px;
          }
          body {
          background-color: white;
@@ -119,6 +119,11 @@ function generateHTML(colorInput, githubData) {
          .photo-header h1 {
          margin-top: 10px;
          }
+         img {
+            border: 3px solid #cccccc;
+            width: 380px;
+            height: 380px;
+         }
          .links-nav {
          width: 100%;
          text-align: center;
@@ -161,18 +166,15 @@ function generateHTML(colorInput, githubData) {
          flex: 1;
          text-align: center;
          }
-
          a {
           text-decoration: none;
           color: #9ebad7;
           font-weight: bold;
           padding-left: 20px;
           padding-right: 20px;
-          padding-top: 15px;
-          padding-bottom: 15px;
+          padding-botton: 0px;
           font-size: larger;
         }
-         
          a:hover {
          text-decoration: none;
          color: inherit;
@@ -180,7 +182,8 @@ function generateHTML(colorInput, githubData) {
          }
 
          .footer {
-          position: absolute;
+          position: fixed;
+          width: 100%;
           bottom: 0;
           flex: 1;
           text-align: center;
@@ -198,7 +201,7 @@ function generateHTML(colorInput, githubData) {
           <div class="row">
             <div class="col">
               <div class="card">
-                <h4>GitHub Developer Profile For</h4>
+                <h4>GitHub Developer Profile</h4>
                 <h1>${githubData.data.name}</h1><br>
                 <img src="${githubData.data.avatar_url}" alt="User Photo">
                   <div class="card">
@@ -214,7 +217,7 @@ function generateHTML(colorInput, githubData) {
           </div>
           <div class="row">
             <div class="col">
-              <div><h2>${githubData.data.bio}<h2></div>
+              <div><h3>${githubData.data.bio}<h3></div>
             </div>
           </div>
           <div class="row">
@@ -223,6 +226,14 @@ function generateHTML(colorInput, githubData) {
                 <p><h3>Public Repositories <br> ${githubData.data.public_repos}</h3></p>
               </div>
             </div>
+            <div class="col">
+              <div class="card">
+                <p><h3>Public Repositories <br> ${githubData.data.public_repos}</h3></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">  
             <div class="col">
               <div class="card">
                 <p><h3>Followers <br> ${githubData.data.followers}</h3></p>
@@ -235,8 +246,9 @@ function generateHTML(colorInput, githubData) {
             </div>
           </div>
           <div class="footer">
-            <p>Profile compiled by Team-Pac-R</p>
+            <p>Profile compiled by TeamPacR</p>
           </footer>
+
       </body>
 </html>`;
 }

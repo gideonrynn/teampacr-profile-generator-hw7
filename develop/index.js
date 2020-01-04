@@ -43,44 +43,44 @@ function initiate() {
         .then(function(response) {
           // console.log(response);
 
-      //pull template from generateHTML to create pdf using puppeteer
-      (async () => {
+          //pull template from generateHTML to create pdf using puppeteer
+          (async () => {
   
-      try {
+            try {
        
-        const browser = await puppeteer.launch();
+            const browser = await puppeteer.launch();
 
-        const page = await browser.newPage();
-        //await go to will pull from existing web page
-         // await page.goto('https://gideonrynn.github.io/portfolio-gideonrynn-array/');
+            const page = await browser.newPage();
+            //await go to will pull from existing web page
+            // await page.goto('https://gideonrynn.github.io/portfolio-gideonrynn-array/');
     
-        const html = generateHTML({color}, response);
+            const html = generateHTML({ color }, response);
 
-        await page.setContent(html);
+            await page.setContent(html);
 
-        //output resume pdf in A4 letter format. printBackground will display css
-        await page.pdf({path: `resume_${username}.pdf`, format: 'A4', printBackground: true});
+            //output resume pdf in A4 letter format. printBackground will display css
+            await page.pdf({path: `resume_${username}.pdf`, format: 'A4', printBackground: true});
 
-        await browser.close();
-        process.exit();
+            await browser.close();
+            process.exit();
 
 
-      //end try then catch
-      } catch (e) {
+            //end try - to catch
+            } catch (e) {
         
-        console.log('our error', e);
+              console.log('our error', e);
 
-      //end catch
-      }
+            //end catch
+            }
       
-    //end async
-    }) ();
+          //end async
+          }) ();
 
+        //end axios-then
+        });
 
-  //end inquirer then
-  });
-
-});
+    //end inquirer-then
+    });
 
 //end initiate function
 }
