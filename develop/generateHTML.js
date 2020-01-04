@@ -180,7 +180,7 @@ function generateHTML(colorInput, githubData) {
          }
 
          .footer {
-          
+          position: absolute;
           bottom: 0;
           flex: 1;
           text-align: center;
@@ -201,54 +201,42 @@ function generateHTML(colorInput, githubData) {
                 <h4>GitHub Developer Profile For</h4>
                 <h1>${githubData.data.name}</h1><br>
                 <img src="${githubData.data.avatar_url}" alt="User Photo">
-                <div class="card">
-
-                <span>
-                  <a href="https://www.google.com/maps/place/${githubData.data.location}"> ${githubData.data.location} <i class="fas fa-external-link-alt"></i></a>
-                  <a href="${githubData.data.html_url}" target="_blank"> Github Profile <i class="fas fa-external-link-alt"></i></a>
-                  <a href="${githubData.data.blog}" target="_blank"> Blog <i class="fas fa-external-link-alt"></i></a>
-                </span>
-
-              </div>
+                  <div class="card">
+                    <span>
+                      <a href="https://www.google.com/maps/place/${githubData.data.location}"> ${githubData.data.location} <i class="fas fa-external-link-alt"></i></a>
+                      <a href="${githubData.data.html_url}" target="_blank"> Github Profile <i class="fas fa-external-link-alt"></i></a>
+                      <a href="${githubData.data.blog}" target="_blank"> Blog <i class="fas fa-external-link-alt"></i></a>
+                    </span>
+                  </div>
 
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col">
-              
-            </div>
-        </div>
-        <div class="row">
-         <div class="col">
-            <div><h2>${githubData.data.bio}<h2></div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
-            <div class="card">
-              <p><h3>Public Repositories <br> ${githubData.data.public_repos}</h3></p>
+              <div><h2>${githubData.data.bio}<h2></div>
             </div>
           </div>
-
-          <div class="col">
-            <div class="card">
-              <p><h3>Followers <br> ${githubData.data.followers}</h3></p>
+          <div class="row">
+            <div class="col">
+              <div class="card">
+                <p><h3>Public Repositories <br> ${githubData.data.public_repos}</h3></p>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <p><h3>Followers <br> ${githubData.data.followers}</h3></p>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card">
+                <p><h3>Following <br> ${githubData.data.following}</h3></p>
+              </div>
             </div>
           </div>
-
-          <div class="col">
-            <div class="card">
-              <p><h3>Following <br> ${githubData.data.following}</h3></p>
-            </div>
-          </div>
-        </div>
-
-       
           <div class="footer">
             <p>Profile compiled by Team-Pac-R</p>
           </footer>
-
       </body>
 </html>`;
 }
