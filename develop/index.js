@@ -41,7 +41,7 @@ function initiate() {
         axios.get(githubURL)
         
         .then(function(response) {
-          console.log(response);
+          // console.log(response);
 
       //pull template from generateHTML to create pdf using puppeteer
       (async () => {
