@@ -36,9 +36,10 @@ The generated template will include:
 
 This project was built using:
 
-  - [Node.js](https://bulma.io/)
-  - [NPM](https://www.npmjs.com/)
-  - [puppeteer](https://www.npmjs.com/package/puppeteer/)
+  - [Axios 0.19.0](https://www.npmjs.com/package/axios)
+  - [Inquirer 7.0.1](https://www.npmjs.com/package/inquirer)
+  - [Puppeteer 2.0.0](https://www.npmjs.com/package/puppeteer/)
+
 
 # License
 
