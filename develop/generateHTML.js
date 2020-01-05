@@ -25,6 +25,7 @@ const colors = {
   }
 };
 
+//use function to pass in user color input and api data, then return template that will ultimately go into the generated profile pdf
 function generateHTML(colorInput, githubData, githubStars) {
   // console.log(colorInput.color);
   // console.log(githubData);
@@ -207,7 +208,7 @@ function generateHTML(colorInput, githubData, githubStars) {
                 <img src="${githubData.data.avatar_url}" alt="User Photo">
                   <div class="card">
                     <span>
-                      <a href="https://www.google.com/maps/place/${githubData.data.location}"> ${githubData.data.location} <i class="fas fa-external-link-alt"></i></a>
+                      <a href="https://www.google.com/maps/place/${githubData.data.location}"> Based in ${githubData.data.location} <i class="fas fa-external-link-alt"></i></a>
                       <a href="${githubData.data.html_url}" target="_blank"> Github Profile <i class="fas fa-external-link-alt"></i></a>
                       <a href="${githubData.data.blog}" target="_blank"> Blog <i class="fas fa-external-link-alt"></i></a>
                     </span>

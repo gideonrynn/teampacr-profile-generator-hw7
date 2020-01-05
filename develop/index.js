@@ -13,26 +13,38 @@ const questions = [
     {
         type: "input",
         name: "username",
-        message: "What is your GitHub username?"
+        message: "Enter GitHub username:"
       },
     
       {
         type: "list",
         name: "color",
-        message: "What is your favorite color?",
+        message: "Select preferred color:",
         choices: ["red", "blue", "green", "pink"]
       }
   
 ];
 
+const nextprofile = [
+  {
+      type: "input",
+      name: "answer",
+      message: "Would you like to generate another profile?"
+    },
+
+];
+
 //this function will prompt the user for information, pull data from the api before generating a pdf in the local folder
 function initiate() {
 
+  //*Inquirer For User Prompt */
   //prompt user from questions object, then use those responses to generate html and pull data from github
-
   inquirer.prompt(questions)
 
+  //then with the username and color returned from the user's input...
   .then(({ username, color }) => {
+
+    //*Axios and GitHub API for updating html template */
 
     function getGitHubData() {
       return axios.get(`https://api.github.com/users/${username}`);
@@ -42,22 +54,23 @@ function initiate() {
       return axios.get(`https://api.github.com/users/${username}/repos?per_page=100`);
     }
     
+    //use all to run both functions and return responses
     axios.all([getGitHubData(), getGitHubStars()])
 
-      .then(axios.spread(function (data, dataStars) {
+      .then(axios.spread(function (githubdata, githubstars) {
         // console.log(dataStars);
         // console.log(data);
-        // Both requests are now complete
 
+        //set variable that will contain the sum of all the stars pulled from the dataStars response
         let dataStarsVal = 0;
 
         //for each item in the dataStars object (from GitHub) grab the value and add together in dataStarsVal
-        dataStars.data.forEach(function(a) {
+        githubstars.data.forEach(function(a) {
             dataStarsVal += a.stargazers_count;
         })
         console.log(dataStarsVal);
 
-          //pull template from generateHTML to create pdf using puppeteer
+          //pull template from generateHTML to create pdf using puppeteer code below
           (async () => {
   
             try {
@@ -65,21 +78,20 @@ function initiate() {
             const browser = await puppeteer.launch();
 
             const page = await browser.newPage();
-            //await go to will pull from existing web page
-            // await page.goto('https://gideonrynn.github.io/portfolio-gideonrynn-array/');
     
-            const html = generateHTML({ color }, data, dataStarsVal);
+            const html = generateHTML({ color }, githubdata, dataStarsVal);
 
             await page.setContent(html);
 
             //output resume pdf in A4 letter format. printBackground will display css
             await page.pdf({path: `profile_${username}.pdf`, format: 'A4', printBackground: true});
 
-            console.log(`File successfully saved to location.`)
+            //indicate file was saved
+            console.log(`File successfully saved to local folder.`);
 
             await browser.close();
-            process.exit();
 
+            process.exit();
 
             //end try - to catch
             } catch (e) {
@@ -88,20 +100,40 @@ function initiate() {
 
             //end catch
             }
-      
+            
           //end async
           }) ();
+          
+    //end axios call - catch
+    }))
+      .catch((error) => {
+      console.log(error.config);
+      });
 
-        //end axios-then
-        // });
-
-      }));
-
-    //end inquirer-then
-    });
+  //end inquirer
+  });
+  
 
 //end initiate function
 }
+
+// function promptContinue () {
+
+//   inquirer.prompt(nextprofile)
+
+//   //then with the username and color returned from the user's input...
+//   .then(({ answer }) => {
+
+//     if (answer == "yes") {
+//       initiate();
+//     }
+//     else {
+//       console.log("Complete!");
+//     }
+
+//   });
+
+// }
 
 //when the index.js is run, call initiate by default
 initiate();
