@@ -25,15 +25,6 @@ const questions = [
   
 ];
 
-const nextprofile = [
-  {
-      type: "input",
-      name: "answer",
-      message: "Would you like to generate another profile?"
-    },
-
-];
-
 //this function will prompt the user for information, pull data from the api before generating a pdf in the local folder
 function initiate() {
 
@@ -86,10 +77,10 @@ function initiate() {
             await page.setContent(html);
 
             //output resume pdf in A4 letter format. printBackground will display css
-            await page.pdf({path: `profile_${username}.pdf`, format: 'A4', printBackground: true});
+            await page.pdf({path: `./profiles/profile_${username}.pdf`, format: 'A4', printBackground: true});
 
             //indicate file was saved
-            console.log(`profile_${username}.pdf successfully saved to local folder.`);
+            console.log(`profile_${username}.pdf successfully saved to "profile" folder.`);
 
 
             await browser.close();
@@ -105,7 +96,7 @@ function initiate() {
             }
             
           //end async
-          })
+          }) ();
           
     //end axios call - catch
     }))
@@ -120,28 +111,5 @@ function initiate() {
 //end initiate function
 }
 
-function promptContinue () {
-
-  inquirer.prompt(nextprofile)
-
-  //then with the username and color returned from the user's input...
-  .then(({ answer }) => {
-
-    if (answer == "yes") {
-      initiate();
-    }
-    else {
-      console.log("Complete!");
-    }
-
-  });
-
-}
-async function a () {
-  await initiate();
-  await promptContinue();
-}
-
-
 //when the index.js is run, call initiate by default
-a();
+initiate();
