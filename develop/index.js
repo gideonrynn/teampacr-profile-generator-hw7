@@ -34,14 +34,28 @@ function initiate() {
 
   .then(({ username, color }) => {
 
-        const githubURL = `https://api.github.com/users/${username}`;
+    function getGitHubData() {
+      return axios.get(`https://api.github.com/users/${username}`);
+    }
+    
+    function getGitHubStars() {
+      return axios.get(`https://api.github.com/users/${username}/repos?per_page=100`);
+    }
+    
+    axios.all([getGitHubData(), getGitHubStars()])
 
-        // const githubRepoURL = `https://api.github.com/users/${username}/repos?per_page=100`;
+      .then(axios.spread(function (data, dataStars) {
+        // console.log(dataStars);
+        // console.log(data);
+        // Both requests are now complete
 
-        axios.get(githubURL)
-        
-        .then(function(response) {
-          // console.log(response);
+        let dataStarsVal = 0;
+
+        //for each item in the dataStars object (from GitHub) grab the value and add together in dataStarsVal
+        dataStars.data.forEach(function(a) {
+            dataStarsVal += a.stargazers_count;
+        })
+        console.log(dataStarsVal);
 
           //pull template from generateHTML to create pdf using puppeteer
           (async () => {
@@ -54,12 +68,14 @@ function initiate() {
             //await go to will pull from existing web page
             // await page.goto('https://gideonrynn.github.io/portfolio-gideonrynn-array/');
     
-            const html = generateHTML({ color }, response);
+            const html = generateHTML({ color }, data, dataStarsVal);
 
             await page.setContent(html);
 
             //output resume pdf in A4 letter format. printBackground will display css
-            await page.pdf({path: `resume_${username}.pdf`, format: 'A4', printBackground: true});
+            await page.pdf({path: `profile_${username}.pdf`, format: 'A4', printBackground: true});
+
+            console.log(`File successfully saved to location.`)
 
             await browser.close();
             process.exit();
@@ -77,7 +93,9 @@ function initiate() {
           }) ();
 
         //end axios-then
-        });
+        // });
+
+      }));
 
     //end inquirer-then
     });

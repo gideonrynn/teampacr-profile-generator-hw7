@@ -25,9 +25,10 @@ const colors = {
   }
 };
 
-function generateHTML(colorInput, githubData) {
+function generateHTML(colorInput, githubData, githubStars) {
   // console.log(colorInput.color);
   // console.log(githubData);
+  // console.log(githubStars);
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -228,7 +229,7 @@ function generateHTML(colorInput, githubData) {
             </div>
             <div class="col">
               <div class="card">
-                <p><h3>Public Repositories <br> ${githubData.data.public_repos}</h3></p>
+                <p><h3>GitHub Stars <br> ${githubStars}</h3></p>
               </div>
             </div>
           </div>
