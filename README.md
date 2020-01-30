@@ -9,7 +9,7 @@ This is a Git Hub repository for the NU Coding Bootcamp Homework 7 developer pro
 Once logged in with [GitHub account](https://github.login/), clone the repo locally using link:
 
 ```sh
-  git clone https://github.com/gideonrynn/dulynoted-note-taker-hw11.git
+  git clone https://github.com/gideonrynn/teampacr-profile-generator-hw7.git
 ```
 
 Also see: [Cloning a respository](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository).
