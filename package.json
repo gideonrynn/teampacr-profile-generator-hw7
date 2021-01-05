@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/gideonrynn/teampacr-profile-generator-hw7#readme",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "inquirer": "^7.0.1",
     "puppeteer": "^2.0.0"
   }
